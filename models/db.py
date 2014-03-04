@@ -45,7 +45,7 @@ auth = Auth(db)
 crud, service, plugins = Crud(db), Service(), PluginManager()
 
 ## create all tables needed by auth if not custom tables
-auth.define_tables(username=False, signature=False)
+auth.define_tables(username=True, signature=False)
 
 ## configure email
 mail = auth.settings.mailer
@@ -82,3 +82,14 @@ use_janrain(auth, filename='private/janrain.key')
 
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
+
+from plugin_ckeditor import CKEditor
+ckeditor = CKEditor(db)
+ckeditor.define_tables()
+
+db.define_table("person",
+                Field("full_name","string"),
+                Field("home_state","string"),
+                Field("person_profile","text",widget=ckeditor.widget))
+
+
