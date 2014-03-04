@@ -59,6 +59,7 @@ class CKEditor(object):
             fake_migrate = fake_migrate,
             format = '%(title)s'
         )
+        #lazy tables breaks this. Need to force the load of the table
         self.settings.table_upload.upload.requires = [
             IS_NOT_EMPTY(),
             IS_LENGTH(maxsize=self.settings.file_length_max, minsize=self.settings.file_length_min),
@@ -160,7 +161,7 @@ class CKEditor(object):
         browse_url = self.settings.url_browse
         ckeditor_js = URL('static', 'plugin_ckeditor/ckeditor.js')
         jquery_js = URL('static', 'plugin_ckeditor/adapters/jquery.js')
-        ckeip_js = URL('static', 'plugin_ckeditor/ckeip.js')
+        #ckeip_js = URL('static', 'plugin_ckeditor/ckeip.js')
         contents_css = "['%s', '%s']" % (URL('static', 'css/base.css'), URL('static', 'plugin_ckeditor/contents.css'))
         
         immediate = ''

@@ -56,3 +56,4 @@ def delete():
     # delete the file from storage
     path = os.path.join(request.folder, 'uploads', filename)
     os.unlink(path)
+

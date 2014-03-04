@@ -1,9 +1,12 @@
-web2py_ckeditor
+web2py_ckeditor_tim
 ===============
 
-Plugin to add ckeditor to web2py apps ( based on the original https://bitbucket.org/PhreeStyle/web2py_ckeditor/wiki/Home)
+This is a fork of Bruno Rocha's plugin.
+It's updated to v4 ckeditor, and works better with recent web2py versions.
+The inline edit has been removed to simplify the code (and it seems that the javascript is no longer maintained upstream).
 
-I added some changes and included some features.
+
+This web2py plugin to add ckeditor to web2py apps is based on the original https://bitbucket.org/PhreeStyle/web2py_ckeditor/wiki/Home)
 
 
 == CKEditor Plugin for web2py ==
@@ -44,20 +47,7 @@ This is great by itself, however, I decided to take it a few steps further. Firs
 
 {{https://lh4.googleusercontent.com/-bsWPwiuQg20/Thcl_C0sraI/AAAAAAAAADE/73qIJK9_OS8/Screen%252520shot%2525202011-07-08%252520at%25252011.02.06%252520AM.png|Result}}
 
-To make this content editable, all it takes is the following line in the view:
-
-{{{
-#!python
-
-{{=ckeditor.edit_in_place('.editable', URL())}}
-
-}}}
-
-This makes any element with the 'editable' class editable in place. It also requires a URL to save the data to when the save button is clicked. Here's what it looks like in edit mode:
-
-{{https://lh3.googleusercontent.com/-9kv2lFa4JjA/ThcmcWAGF5I/AAAAAAAAADM/UAwhM6LxoeQ/Screen%252520shot%2525202011-07-08%252520at%25252011.02.16%252520AM.png|Edit in Place}}
-
-It is all AJAX enabled, spellchecks as you type, and it's fast. Edit in place is another great feature, but I also took it a step further than that and integrated upload and browse functionality for images and Flash movies:
+Integrated upload and browse functionality for images and Flash movies:
 
 {{https://lh4.googleusercontent.com/-XtkEW2sXXyU/Thcm-IwkZ8I/AAAAAAAAADU/uyPo2FTMob0/Screen%252520shot%2525202011-07-08%252520at%25252011.33.28%252520AM.png|Image Properties}}
 
@@ -71,8 +61,9 @@ The upload and browse functionality is all taken care of by the plugin and does 
 
 === References ===
 
-I used the following resources in developing this plugin, so a special thanks to the authors of these for providing the ground work required to make this possible:
+Bruno used the following resources in developing this plugin, so a special thanks to the authors of these for providing the ground work required to make this possible:
 
 http://www.web2pyslices.com/main/slices/take_slice/18
 
 http://www.bitsntuts.com/jquery/ckeditor-edit-in-place-jquery-plugin
+
