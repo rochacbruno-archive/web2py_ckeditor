@@ -65,40 +65,7 @@ class CKEditor(object):
             IS_LENGTH(maxsize=self.settings.file_length_max, minsize=self.settings.file_length_min),
         ]
     
-    def edit_in_place(self, selector, url):
-        """
-        Creates an instance of CKEditor that will edit selected HTML elements
-        in place and provide AJAX saving capabilities. To start editing, the
-        user will need to double click on one of the matched selectors.
-        
-        Requires a URL to return saved data to. The data will be stored in
-        request.vars.content.
-        
-        NOTE: This should not be used for multi-tenant applications or where
-        there is a possibility a malicious user could tamper with the variables.
-        """
-        javascript = self.load()
-        
-        return XML(
-            """
-            %(javascript)s
-            <script type="text/javascript">
-                jQuery(function() {
-                    jQuery('%(selector)s').ckeip({
-                        e_url: '%(url)s',
-                        ckeditor_config: ckeditor_config(),
-                    });
-                });
-            </script>
-            """ % dict(
-                javascript = javascript,
-                selector = selector,
-                url = url,
-            )
-        )
-        
-        return javascript
-        
+
     def widget(self, field, value, **attributes):
         """
         To be used with db.table.field.widget to set CKEditor as the desired widget for the field.
@@ -161,7 +128,7 @@ class CKEditor(object):
         browse_url = self.settings.url_browse
         ckeditor_js = URL('static', 'plugin_ckeditor/ckeditor.js')
         jquery_js = URL('static', 'plugin_ckeditor/adapters/jquery.js')
-        #ckeip_js = URL('static', 'plugin_ckeditor/ckeip.js')
+
         contents_css = "['%s', '%s']" % (URL('static', 'css/base.css'), URL('static', 'plugin_ckeditor/contents.css'))
         
         immediate = ''
@@ -179,29 +146,10 @@ class CKEditor(object):
         
         return XML(
             """
-            <style type="text/css">
-                .cke_skin_kama input.cke_dialog_ui_input_text, .cke_skin_kama input.cke_dialog_ui_input_password {
-                    margin: 0;
-                }
-                
-                .ckeip_toolbar {
-                    position: relative;
-                    background: white;
-                    border-top: 1px solid #D3D3D3;
-                    border-left: 1px solid #D3D3D3;
-                    border-right: 1px solid #D3D3D3;
-                    -moz-border-radius-topleft: 5px;
-                    -moz-border-radius-topright: 5px;
-                    border-top-left-radius: 5px;
-                    border-top-right-radius: 5px;
-                    padding: 0.5em;
-                    margin-bottom: -5px;
-                    z-index: 1;
-                }
-            </style>
+
             <script type="text/javascript" src="%(ckeditor_js)s"></script>
             <script type="text/javascript" src="%(jquery_js)s"></script>
-            <script type="text/javascript" src="%(ckeip_js)s"></script>
+
             <script type="text/javascript">
                 function ckeditor_config() {
                     return {
@@ -227,7 +175,7 @@ class CKEditor(object):
             """ % dict(
                 ckeditor_js = ckeditor_js,
                 jquery_js = jquery_js,
-                ckeip_js = ckeip_js,
+
                 contents_css = contents_css,
                 upload_url = upload_url,
                 browse_url = browse_url,

@@ -1,12 +1,14 @@
-web2py_ckeditor_tim
+web2py_ckeditor (2014 fork, v0.2)
 ===============
 
 This is a fork of Bruno Rocha's plugin.
-It's updated to v4 ckeditor, and works better with recent web2py versions.
+It's updated to v4 ckeditor, and works better with recent web2py versions. Tested against web2py v2.9.x
 The inline edit has been removed to simplify the code (and it seems that the javascript is no longer maintained upstream).
 
 
 This web2py plugin to add ckeditor to web2py apps is based on the original https://bitbucket.org/PhreeStyle/web2py_ckeditor/wiki/Home)
+
+To upgrade to a newer version of ckeditor, replace the directory static/plugin_ckeditor with the directory downloaded from the ckedotr site.
 
 
 == CKEditor Plugin for web2py ==
@@ -16,7 +18,6 @@ This web2py plugin to add ckeditor to web2py apps is based on the original https
 Sometimes you just need a WYSIWYG editor. This plugin integrates CKEditor into web2py. It acts much like the Auth object in its usage. For example, in your model, you need to import and initialize it:
 
 {{{
-#!python
 
 from plugin_ckeditor import CKEditor
 ckeditor = CKEditor(db)
@@ -29,7 +30,6 @@ ckeditor.define_tables()
 It's most basic usage is to assign it to a Field widget:
 
 {{{
-#!python
 
 db.define_table('content',
     Field('title', length=255),
@@ -39,15 +39,12 @@ db.define_table('content',
 
 }}}
 
-The CKEditor now automatically becomes available every time SQLFORM is used. This is a screen shot of it in action:
+The CKEditor now automatically becomes available every time SQLFORM is used.
 
-{{https://lh4.googleusercontent.com/-HLLFte_tXCw/ThclwgF-TtI/AAAAAAAAAC8/cu3qqcUuDeE/Screen%252520shot%2525202011-07-08%252520at%25252011.01.36%252520AM.png|Main Window}}
+It includes integrated upload and browse functionality for images. The plugin defines a table to store images.
+This works using ckeditor's custom browser integration, which means web2py controls the display of contents when the user cliick browse.
+Look at the file views/plugin_ckeditor/browse.html to alter the appearance of the uploaded file browser.
 
-This is great by itself, however, I decided to take it a few steps further. First of all, also supports edit in place. This is a test page to demonstrate:
-
-{{https://lh4.googleusercontent.com/-bsWPwiuQg20/Thcl_C0sraI/AAAAAAAAADE/73qIJK9_OS8/Screen%252520shot%2525202011-07-08%252520at%25252011.02.06%252520AM.png|Result}}
-
-Integrated upload and browse functionality for images and Flash movies:
 
 {{https://lh4.googleusercontent.com/-XtkEW2sXXyU/Thcm-IwkZ8I/AAAAAAAAADU/uyPo2FTMob0/Screen%252520shot%2525202011-07-08%252520at%25252011.33.28%252520AM.png|Image Properties}}
 
