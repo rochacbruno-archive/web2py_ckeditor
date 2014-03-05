@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-web2py plugin for CKEditor: http://ckeditor.com/
+web2py_ckeditor4: web2py plugin for CKEditor v4: http://ckeditor.com/
 """
 
-__author__ = 'Ross Peoples'
-__email__ = 'ross.peoples@gmail.com'
-__copyright__ = 'Copyright(c) 2012, Ross Peoples'
+__author__ = 'Tim Richardson'
+__email__ = 'tim@growthpath.com.au'
+__copyright__ = 'Copyright(c) 2012-2014, Ross Peoples, Bruno Rocha, Tim Richardson'
 __license__ = 'LGPLv3'
-__version__ = '1.0'
+__version__ = '0.1'
 __status__ = 'Development'  # possible options: Prototype, Development, Production
 
 import os
