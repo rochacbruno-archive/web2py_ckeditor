@@ -11,33 +11,28 @@ This web2py plugin to add ckeditor to web2py apps is based on the original https
 To upgrade to a newer version of ckeditor, replace the directory static/plugin_ckeditor with the directory downloaded from the ckedotr site.
 
 
-== CKEditor Plugin for web2py ==
+## CKEditor Plugin for web2py 
 
-=== Introduction ===
+### Introduction 
 
 Sometimes you just need a WYSIWYG editor. This plugin integrates CKEditor into web2py. It acts much like the Auth object in its usage. For example, in your model, you need to import and initialize it:
 
-{{{
+    from plugin_ckeditor import CKEditor
+    ckeditor = CKEditor(db)
+    ckeditor.define_tables()
 
-from plugin_ckeditor import CKEditor
-ckeditor = CKEditor(db)
-ckeditor.define_tables()
 
-}}}
-
-=== Basic Usage ===
+### Basic Usage
 
 It's most basic usage is to assign it to a Field widget:
 
-{{{
 
-db.define_table('content',
-    Field('title', length=255),
-    Field('public', 'boolean', default=True),
-    Field('text', 'text', widget=ckeditor.widget)
-)
+      db.define_table('content',
+            Field('title', length=255),
+            Field('public', 'boolean', default=True),
+            Field('text', 'text', widget=ckeditor.widget)
+        )
 
-}}}
 
 The CKEditor now automatically becomes available every time SQLFORM is used.
 
@@ -45,18 +40,25 @@ It includes integrated upload and browse functionality for images. The plugin de
 This works using ckeditor's custom browser integration, which means web2py controls the display of contents when the user cliick browse.
 Look at the file views/plugin_ckeditor/browse.html to alter the appearance of the uploaded file browser.
 
+#### Image Properties
 
-{{https://lh4.googleusercontent.com/-XtkEW2sXXyU/Thcm-IwkZ8I/AAAAAAAAADU/uyPo2FTMob0/Screen%252520shot%2525202011-07-08%252520at%25252011.33.28%252520AM.png|Image Properties}}
+![Screenshot](https://lh4.googleusercontent.com/-XtkEW2sXXyU/Thcm-IwkZ8I/AAAAAAAAADU/uyPo2FTMob0/Screen%252520shot%2525202011-07-08%252520at%25252011.33.28%252520AM.png)
 
-{{https://lh3.googleusercontent.com/-mBjk0bs_-Z8/ThcnEixpCDI/AAAAAAAAADc/_xH6sWwgs6o/Screen%252520shot%2525202011-07-08%252520at%25252011.35.29%252520AM.png|Image Info}}
+#### Image Info
 
-{{https://lh5.googleusercontent.com/-M4ddg9Dz9Kg/ThcnH0dubEI/AAAAAAAAADk/9WzdPj1ZiVE/Screen%2Bshot%2B2011-07-08%2Bat%2B11.35.06%2BAM.png|Browse Images}}
+![Screenshot](https://lh3.googleusercontent.com/-mBjk0bs_-Z8/ThcnEixpCDI/AAAAAAAAADc/_xH6sWwgs6o/Screen%252520shot%2525202011-07-08%252520at%25252011.35.29%252520AM.png)
 
-{{https://lh4.googleusercontent.com/-8DKGzp3qqbs/ThcnV3GNCOI/AAAAAAAAADs/A6_-CGOM8-g/Screen%252520shot%2525202011-07-08%252520at%25252011.35.42%252520AM.png|Image Upload Result}}
+#### Browse Images
+
+![Screenshot](https://lh5.googleusercontent.com/-M4ddg9Dz9Kg/ThcnH0dubEI/AAAAAAAAADk/9WzdPj1ZiVE/Screen%2Bshot%2B2011-07-08%2Bat%2B11.35.06%2BAM.png)
+
+#### Image Upload Result
+
+![Screenshot](https://lh4.googleusercontent.com/-8DKGzp3qqbs/ThcnV3GNCOI/AAAAAAAAADs/A6_-CGOM8-g/Screen%252520shot%2525202011-07-08%252520at%25252011.35.42%252520AM.png)
 
 The upload and browse functionality is all taken care of by the plugin and does not require you to do anything on your end once you have initialized the plugin in your model as demonstrated above.
 
-=== References ===
+##### References
 
 Bruno used the following resources in developing this plugin, so a special thanks to the authors of these for providing the ground work required to make this possible:
 
