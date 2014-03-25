@@ -6,7 +6,7 @@ It's updated to v4 ckeditor, and works better with recent web2py versions. Teste
 The inline edit has been removed to simplify the code (and it seems that the javascript is no longer maintained upstream).
 
 
-This web2py plugin to add ckeditor to web2py apps is based on the original https://bitbucket.org/PhreeStyle/web2py_ckeditor/wiki/Home)
+This web2py plugin is based on the original https://bitbucket.org/PhreeStyle/web2py_ckeditor/wiki/Home)
 
 To upgrade to a newer version of ckeditor, replace the directory static/plugin\_ckeditor with the directory downloaded from the ckeditor site. The repository comes with a full version. To use that, rename the 'full' plugin to static/plugin_ckeditor
 
