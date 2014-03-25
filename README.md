@@ -1,5 +1,7 @@
-web2py_ckeditor (2014 fork, v0.2)
+web2py_ckeditor (2014 fork, v0.3)
 ===============
+v 0.3 The full version of the plugin is the default. The std version is included as well. 
+Updated to ckeditor v4.3.4. March 25, 2014
 
 This is a fork of Bruno Rocha's plugin.
 It's updated to v4 ckeditor, and works better with recent web2py versions. Tested against web2py v2.9.x
