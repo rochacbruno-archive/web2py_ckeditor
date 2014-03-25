@@ -156,6 +156,7 @@ class CKEditor(object):
                         contentsCss: %(contents_css)s,
                         filebrowserUploadUrl: '%(upload_url)s',
                         filebrowserBrowseUrl: '%(browse_url)s',
+                        /*
                         toolbar: [
                             {name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
                             {name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt']},
@@ -166,7 +167,7 @@ class CKEditor(object):
                             {name: 'styles', items: ['Format', 'Font', 'FontSize']},
                             {name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']},
                             {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
-                        ],
+                        ],*/
                         scayt_autoStartup: %(scayt)s,
                     }
                 }

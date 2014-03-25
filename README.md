@@ -8,7 +8,7 @@ The inline edit has been removed to simplify the code (and it seems that the jav
 
 This web2py plugin to add ckeditor to web2py apps is based on the original https://bitbucket.org/PhreeStyle/web2py_ckeditor/wiki/Home)
 
-To upgrade to a newer version of ckeditor, replace the directory static/plugin_ckeditor with the directory downloaded from the ckedotr site.
+To upgrade to a newer version of ckeditor, replace the directory static/plugin\_ckeditor with the directory downloaded from the ckeditor site. The repository comes with a full version. To use that, rename the 'full' plugin to static/plugin_ckeditor
 
 
 ## CKEditor Plugin for web2py 
