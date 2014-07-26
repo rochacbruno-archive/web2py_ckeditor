@@ -70,3 +70,23 @@ http://www.web2pyslices.com/main/slices/take_slice/18
 
 http://www.bitsntuts.com/jquery/ckeditor-edit-in-place-jquery-plugin
 
+
+#### Tips
+
+(From Leonel Câmara) When using it in a loaded component, there may be some routing issues. 
+To solve: ...use the following code in your model before ckeditor.define_tables()
+
+    # To avoid routing problems in case we're not the default app and in case we're in a LOAD and the extension for URLs isn't HTML
+    ckeditor.settings.url_upload = URL(request.app, 'plugin_ckeditor', 'upload', extension='html')
+    ckeditor.settings.url_browse = URL(request.app, 'plugin_ckeditor', 'browse', extension='html')
+
+
+Q: "I was wondering how to preserve the formatting that's done for a field Using CKEditor when the field is serialized in a view."
+
+Leonel Câmara: 	"You use the XML helper. For instance, let's suppose I have a table 'page' with a field 'body' which I have set with ckeditor. In the view I can do:
+{{=XML(page.body, sanitize=False)}}
+
+If you can trust the input "sanitize=False" is a good idea (for instance if it can only be changed in the backoffice by members of the administration), otherwise remove the sanitize=False."
+
+
+
