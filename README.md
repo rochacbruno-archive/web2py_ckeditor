@@ -1,5 +1,7 @@
-web2py_ckeditor (2014 fork, v0.3)
+web2py_ckeditor (2014 fork, v0.4)
 ===============
+v 0.4 Updated to ckeditor 4.4.3 July 15 2014
+
 v 0.3 The full version of the plugin is the default. The std version is included as well. 
 Updated to ckeditor v4.3.4. March 25, 2014
 
