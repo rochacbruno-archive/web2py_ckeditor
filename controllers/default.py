@@ -18,9 +18,9 @@ def index():
     if you need a simple wiki simply replace the two lines below with:
     return auth.wiki()
     """
+    response.flash = T("Welcome to web2py!")
     form = SQLFORM.grid(db.person)
-    return {'form':form}
-
+    return locals()
 
 def user():
     """
