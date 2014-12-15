@@ -29,6 +29,7 @@ class CKEditor(object):
         
         self.settings = Storage()
         self.settings.table_upload = None
+        self.settings.uploadfs = None
         self.settings.table_upload_name = 'plugin_ckeditor_upload'
         self.settings.extra_fields = {}
         self.settings.url_upload = URL('plugin_ckeditor', 'upload')
@@ -53,7 +54,7 @@ class CKEditor(object):
             Field('filename', length=255),
             Field('flength', 'integer'),
             Field('mime_type', length=128),
-            Field('upload', 'upload'),
+            Field('upload', 'upload', uploadfs=self.settings.uploadfs),
             *self.settings.extra_fields.get(upload_name, []),
             migrate = migrate,
             fake_migrate = fake_migrate,
