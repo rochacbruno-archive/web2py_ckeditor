@@ -4,20 +4,22 @@ import os
 from gluon import *
 
 def upload():
-    (new_filename, old_filename, length, mime_type) = current.plugin_ckeditor.handle_upload()
+    (new_filename, old_filename, length,
+     mime_type) = current.plugin_ckeditor.handle_upload()
     
     title = os.path.splitext(old_filename)[0]
     
     result = current.plugin_ckeditor.settings.table_upload.validate_and_insert(
-        title = title,
-        filename = old_filename,
-        upload = new_filename,
-        flength = length,
-        mime_type = mime_type
+        title=title,
+        filename=old_filename,
+        upload=new_filename,
+        flength=length,
+        mime_type=mime_type
     )
     
     text = ''
-    url = URL(*current.plugin_ckeditor.settings.download_url, args=[new_filename]) #URL('default', 'download', args=[new_filename])
+    url = URL(*current.plugin_ckeditor.settings.download_url,
+              args=[new_filename])
     
     if not result.id:
         text = result.errors
@@ -50,9 +52,8 @@ def delete():
         
     db = current.plugin_ckeditor.db
     table_upload = current.plugin_ckeditor.settings.table_upload
-    db(table_upload.upload==filename).delete()
+    db(table_upload.upload == filename).delete()
     
     # delete the file from storage
-    path = os.path.join(request.folder, 'uploads', filename)
-    os.unlink(path)
+    current.plugin_ckeditor.unlink(filename)
 
