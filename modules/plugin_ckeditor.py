@@ -6,10 +6,12 @@ web2py_ckeditor4: web2py plugin for CKEditor v4: http://ckeditor.com/
 
 __author__ = 'Tim Richardson'
 __email__ = 'tim@growthpath.com.au'
-__copyright__ = 'Copyright(c) 2012-2014, Ross Peoples, Bruno Rocha, Tim Richardson'
+__copyright__ = 'Copyright(c) 2012-2014, Ross Peoples, Bruno Rocha, ' \
+                'Tim Richardson'
 __license__ = 'LGPLv3'
 __version__ = '0.1'
-__status__ = 'Development'  # possible options: Prototype, Development, Production
+# possible options: Prototype, Development, Production
+__status__ = 'Development'
 
 import os
 from gluon import *
@@ -63,14 +65,16 @@ class CKEditor(object):
         #lazy tables breaks this. Need to force the load of the table
         self.settings.table_upload.upload.requires = [
             IS_NOT_EMPTY(),
-            IS_LENGTH(maxsize=self.settings.file_length_max, minsize=self.settings.file_length_min),
+            IS_LENGTH(maxsize=self.settings.file_length_max,
+                      minsize=self.settings.file_length_min),
         ]
     
 
     def widget(self, field, value, **attributes):
         """
-        To be used with db.table.field.widget to set CKEditor as the desired widget for the field.
-        Simply set db.table.field.widget = ckeditor.widget to use the CKEditor widget.
+        To be used with db.table.field.widget to set CKEditor as the desired
+        widget for the field. Simply set
+        db.table.field.widget = ckeditor.widget to use the CKEditor widget.
         """
         default = dict(
             value = value,
@@ -82,15 +86,17 @@ class CKEditor(object):
         attributes['_class'] = 'text plugin_ckeditor'
                     
         textarea = TEXTAREA(**attributes)
-        javascript = self.load('#' + textarea.attributes['_id'], use_caching=False)
+        javascript = self.load('#' + textarea.attributes['_id'],
+                               use_caching=False)
         result = CAT(textarea, javascript)
 
         return result
         
     def handle_upload(self):
         """
-        Gets an upload from CKEditor and returns the new filename that can then be
-        inserted into a database. Returns (new_filename, old_filename, length, mime_type)
+        Gets an upload from CKEditor and returns the new filename that
+        can then be inserted into a database. Returns (new_filename,
+        old_filename, length, mime_type)
         """
         upload = current.request.vars.upload
         path = os.path.join(current.request.folder, 'uploads')
@@ -106,7 +112,8 @@ class CKEditor(object):
                 )
                 
                 old_filename = upload.filename
-                new_filename = form.table.upload.store(upload.file, upload.filename)
+                new_filename = form.table.upload.store(upload.file,
+                                                       upload.filename)
                 if self.settings.uploadfs:
                     length = self.settings.uploadfs.getsize(new_filename)
                 else:
@@ -118,7 +125,17 @@ class CKEditor(object):
                 raise HTTP(401, 'Upload is not proper type.')
         else:
             raise HTTP(401, 'Missing required upload.')
-            
+
+    def unlink(self, filename):
+        """
+        Unlink file from storage. It can be an local storage or a filesystem.
+        Using self.unlink and clean file with filename.
+        """
+        if self.settings.uploadfs:
+            self.settings.uploadfs.remove(filename)
+        else:
+            os.path.join(current.request.folder, 'uploads', filename)
+
     def load(self, selector=None, use_caching=True):
         """
         Generates the required JavaScript for CKEditor. If selector is set,
