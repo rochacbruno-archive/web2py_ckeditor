@@ -98,13 +98,19 @@ class CKEditor(object):
         if upload != None:
             if hasattr(upload, 'file'):
                 form = SQLFORM.factory(
-                    Field('upload', 'upload', requires=IS_NOT_EMPTY(), uploadfolder=path),
-                    table_name = self.settings.table_upload_name
+                    Field('upload', 'upload', requires=IS_NOT_EMPTY(),
+                          uploadfs=self.settings.uploadfs,
+                          uploadfolder=path),
+                    table_name=self.settings.table_upload_name,
+
                 )
                 
                 old_filename = upload.filename
                 new_filename = form.table.upload.store(upload.file, upload.filename)
-                length = os.path.getsize(os.path.join(path, new_filename))
+                if self.settings.uploadfs:
+                    length = self.settings.uploadfs.getsize(new_filename)
+                else:
+                    length = os.path.getsize(os.path.join(path, new_filename))
                 mime_type = upload.headers['content-type']
                 
                 return (new_filename, old_filename, length, mime_type)
