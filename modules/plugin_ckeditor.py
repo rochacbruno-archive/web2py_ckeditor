@@ -136,7 +136,7 @@ class CKEditor(object):
         ckeditor_js = URL('static', 'plugin_ckeditor/ckeditor.js')
         jquery_js = URL('static', 'plugin_ckeditor/adapters/jquery.js')
 
-        contents_css = "['%s', '%s']" % (URL('static', 'css/base.css'), URL('static', 'plugin_ckeditor/contents.css'))
+        contents_css = "['%s']" % URL('static', 'plugin_ckeditor/contents.css')
         
         immediate = ''
         if selector:
