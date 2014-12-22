@@ -2,7 +2,6 @@
 
 import os
 from gluon import *
-from plugin_ckeditor import CKEditor
 
 def upload():
     (new_filename, old_filename, length, mime_type) = current.plugin_ckeditor.handle_upload()
