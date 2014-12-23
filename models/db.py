@@ -90,6 +90,7 @@ ckeditor.define_tables()
 db.define_table("person",
                 Field("full_name","string"),
                 Field("home_state","string"),
+                Field("a_boolean","boolean"),
                 Field("person_profile","text",widget=ckeditor.widget))
 
 
