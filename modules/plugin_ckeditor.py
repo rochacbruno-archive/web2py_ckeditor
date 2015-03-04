@@ -56,18 +56,12 @@ class CKEditor(object):
             Field('filename', length=255),
             Field('flength', 'integer'),
             Field('mime_type', length=128),
-            Field('upload', 'upload', uploadfs=self.settings.uploadfs),
+            Field('upload', 'upload', uploadfs=self.settings.uploadfs, requires=[IS_NOT_EMPTY(), IS_LENGTH(maxsize=self.settings.file_length_max, minsize=self.settings.file_length_min)]),
             *self.settings.extra_fields.get(upload_name, []),
             migrate = migrate,
             fake_migrate = fake_migrate,
             format = '%(title)s'
         )
-        #lazy tables breaks this. Need to force the load of the table
-        self.settings.table_upload.upload.requires = [
-            IS_NOT_EMPTY(),
-            IS_LENGTH(maxsize=self.settings.file_length_max,
-                      minsize=self.settings.file_length_min),
-        ]
     
 
     def widget(self, field, value, **attributes):
