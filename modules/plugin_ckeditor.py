@@ -9,7 +9,7 @@ __email__ = 'tim@growthpath.com.au'
 __copyright__ = 'Copyright(c) 2012-2014, Ross Peoples, Bruno Rocha, ' \
                 'Tim Richardson'
 __license__ = 'LGPLv3'
-__version__ = '0.1'
+__version__ = '1.1'
 # possible options: Prototype, Development, Production
 __status__ = 'Development'
 
@@ -26,9 +26,9 @@ class CKEditor(object):
         """
         Initializes the CKEditor module. Requires a DAL instance.
         """
-        
+
         self.db = db
-        
+
         self.settings = Storage()
         self.settings.table_upload = None
         self.settings.uploadfs = None
@@ -40,17 +40,17 @@ class CKEditor(object):
         self.settings.file_length_max = 10485760    # 10 MB
         self.settings.file_length_min = 0           # no minimum
         self.settings.spellcheck_while_typing = True
-        
+
         self.settings.download_url = download_url
         current.plugin_ckeditor = self
-    
+
     def define_tables(self, migrate=True, fake_migrate=False):
         """
         Called after settings are set to create the required tables for dealing
         with file uploads from CKEditor.
         """
         upload_name = self.settings.table_upload_name
-        
+
         self.settings.table_upload = self.db.define_table(upload_name,
             Field('title', length=255),
             Field('filename', length=255),
@@ -62,7 +62,7 @@ class CKEditor(object):
             fake_migrate = fake_migrate,
             format = '%(title)s'
         )
-    
+
 
     def widget(self, field, value, **attributes):
         """
@@ -75,17 +75,17 @@ class CKEditor(object):
             _cols = 80,
             _rows = 10
         )
-        
+
         attributes = FormWidget._attributes(field, default, **attributes)
         attributes['_class'] = 'text plugin_ckeditor'
-                    
+
         textarea = TEXTAREA(**attributes)
         javascript = self.load('#' + textarea.attributes['_id'],
                                use_caching=False)
         result = CAT(textarea, javascript)
 
         return result
-        
+
     def handle_upload(self):
         """
         Gets an upload from CKEditor and returns the new filename that
@@ -94,7 +94,7 @@ class CKEditor(object):
         """
         upload = current.request.vars.upload
         path = os.path.join(current.request.folder, 'uploads')
-        
+
         if upload != None:
             if hasattr(upload, 'file'):
                 form = SQLFORM.factory(
@@ -104,7 +104,7 @@ class CKEditor(object):
                     table_name=self.settings.table_upload_name,
 
                 )
-                
+
                 old_filename = upload.filename
                 new_filename = form.table.upload.store(upload.file,
                                                        upload.filename)
@@ -113,7 +113,7 @@ class CKEditor(object):
                 else:
                     length = os.path.getsize(os.path.join(path, new_filename))
                 mime_type = upload.headers['content-type']
-                
+
                 return (new_filename, old_filename, length, mime_type)
             else:
                 raise HTTP(401, 'Upload is not proper type.')
@@ -141,14 +141,14 @@ class CKEditor(object):
             return XML('')
         else:
             self.settings.loaded = True
-        
+
         upload_url = self.settings.url_upload
         browse_url = self.settings.url_browse
         ckeditor_js = URL('static', 'plugin_ckeditor/ckeditor.js')
         jquery_js = URL('static', 'plugin_ckeditor/adapters/jquery.js')
 
         contents_css = "['%s']" % URL('static', 'plugin_ckeditor/contents.css')
-        
+
         immediate = ''
         if selector:
             immediate = """
@@ -157,11 +157,11 @@ class CKEditor(object):
                     jQuery('%s').ckeditor(config);
                 });
             """ % selector
-            
+
         scayt = 'false'
         if self.settings.spellcheck_while_typing:
             scayt = 'true'
-        
+
         return XML(
             """
 
@@ -202,7 +202,7 @@ class CKEditor(object):
                 immediate = immediate,
             )
         )
-        
+
     def filetype(self, filename):
         """
         Takes a filename and returns a category based on the file type.
