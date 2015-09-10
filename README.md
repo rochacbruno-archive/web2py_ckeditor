@@ -1,5 +1,8 @@
 web2py_ckeditor (2014 fork, v1.0)
 ===============
+
+v1.1 Update to ckeditor 4.5.3 September 09 2015
+
 v 1.0 Updated to ckeditor 4.4.6
       Merged cleanup and upload improvements from dmvieira
 
@@ -48,22 +51,6 @@ It includes integrated upload and browse functionality for images. The plugin de
 This works using ckeditor's custom browser integration, which means web2py controls the display of contents when the user cliick browse.
 Look at the file views/plugin_ckeditor/browse.html to alter the appearance of the uploaded file browser.
 
-#### Image Properties
-
-![Screenshot](https://lh4.googleusercontent.com/-XtkEW2sXXyU/Thcm-IwkZ8I/AAAAAAAAADU/uyPo2FTMob0/Screen%252520shot%2525202011-07-08%252520at%25252011.33.28%252520AM.png)
-
-#### Image Info
-
-![Screenshot](https://lh3.googleusercontent.com/-mBjk0bs_-Z8/ThcnEixpCDI/AAAAAAAAADc/_xH6sWwgs6o/Screen%252520shot%2525202011-07-08%252520at%25252011.35.29%252520AM.png)
-
-#### Browse Images
-
-![Screenshot](https://lh5.googleusercontent.com/-M4ddg9Dz9Kg/ThcnH0dubEI/AAAAAAAAADk/9WzdPj1ZiVE/Screen%2Bshot%2B2011-07-08%2Bat%2B11.35.06%2BAM.png)
-
-#### Image Upload Result
-
-![Screenshot](https://lh4.googleusercontent.com/-8DKGzp3qqbs/ThcnV3GNCOI/AAAAAAAAADs/A6_-CGOM8-g/Screen%252520shot%2525202011-07-08%252520at%25252011.35.42%252520AM.png)
-
 The upload and browse functionality is all taken care of by the plugin and does not require you to do anything on your end once you have initialized the plugin in your model as demonstrated above.
 
 ##### References
@@ -91,6 +78,3 @@ Leonel Câmara: 	"You use the XML helper. For instance, let's suppose I have a t
 {{=XML(page.body, sanitize=False)}}
 
 If you can trust the input "sanitize=False" is a good idea (for instance if it can only be changed in the backoffice by members of the administration), otherwise remove the sanitize=False."
-
-
-
