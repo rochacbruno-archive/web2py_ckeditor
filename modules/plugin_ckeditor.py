@@ -128,7 +128,8 @@ class CKEditor(object):
         if self.settings.uploadfs:
             self.settings.uploadfs.remove(filename)
         else:
-            os.path.join(current.request.folder, 'uploads', filename)
+            filepath = os.path.join(current.request.folder, 'uploads', filename)
+            os.unlink(filepath)
 
     def load(self, selector=None, use_caching=True):
         """
