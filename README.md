@@ -1,6 +1,10 @@
 web2py_ckeditor (2014 fork, v1.0)
 ===============
 
+v1.2 Updated to ckeditor 4.5.7 Feb 2016.
+
+v1.1.1 Bugfix from flavour: Make unlink do something when uploadfs is None
+
 v1.1 Update to ckeditor 4.5.3 September 09 2015
 
 v 1.0 Updated to ckeditor 4.4.6
