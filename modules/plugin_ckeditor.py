@@ -40,6 +40,7 @@ class CKEditor(object):
         self.settings.file_length_max = 10485760    # 10 MB
         self.settings.file_length_min = 0           # no minimum
         self.settings.spellcheck_while_typing = True
+        self.settings.toolbar = ''
 
         self.settings.download_url = download_url
         current.plugin_ckeditor = self
@@ -162,6 +163,8 @@ class CKEditor(object):
         scayt = 'false'
         if self.settings.spellcheck_while_typing:
             scayt = 'true'
+            
+        toolbar = self.settings.toolbar
 
         return XML(
             """
@@ -188,6 +191,7 @@ class CKEditor(object):
                             {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock']},
                         ],*/
                         scayt_autoStartup: %(scayt)s,
+                        toolbar: %(toolbar)s,
                     }
                 }
                 %(immediate)s
@@ -201,6 +205,7 @@ class CKEditor(object):
                 browse_url = browse_url,
                 scayt = scayt,
                 immediate = immediate,
+                toolbar = toolbar,
             )
         )
 
