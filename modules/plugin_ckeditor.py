@@ -41,6 +41,7 @@ class CKEditor(object):
         self.settings.file_length_min = 0           # no minimum
         self.settings.spellcheck_while_typing = True
         self.settings.toolbar = ''
+        self.settings.upload_folder = 'uploads'
 
         self.settings.download_url = download_url
         current.plugin_ckeditor = self
@@ -57,7 +58,13 @@ class CKEditor(object):
             Field('filename', length=255),
             Field('flength', 'integer'),
             Field('mime_type', length=128),
-            Field('upload', 'upload', uploadfs=self.settings.uploadfs, requires=[IS_NOT_EMPTY(), IS_LENGTH(maxsize=self.settings.file_length_max, minsize=self.settings.file_length_min)]),
+            Field('upload', 'upload',
+                  uploadfs=self.settings.uploadfs,
+                  uploadfolder=os.path.join(current.request.folder,
+                                            self.settings.upload_folder), 
+                  requires=[IS_NOT_EMPTY(),
+                            IS_LENGTH(maxsize=self.settings.file_length_max,
+                                      minsize=self.settings.file_length_min)]),
             *self.settings.extra_fields.get(upload_name, []),
             migrate = migrate,
             fake_migrate = fake_migrate,
@@ -94,7 +101,7 @@ class CKEditor(object):
         old_filename, length, mime_type)
         """
         upload = current.request.vars.upload
-        path = os.path.join(current.request.folder, 'uploads')
+        path = os.path.join(current.request.folder, self.settings.upload_folder)
 
         if upload != None:
             if hasattr(upload, 'file'):
@@ -129,7 +136,7 @@ class CKEditor(object):
         if self.settings.uploadfs:
             self.settings.uploadfs.remove(filename)
         else:
-            filepath = os.path.join(current.request.folder, 'uploads', filename)
+            filepath = os.path.join(current.request.folder, self.settings.upload_folder, filename)
             os.unlink(filepath)
 
     def load(self, selector=None, use_caching=True):
